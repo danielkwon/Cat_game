@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냥냥 키우기</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 시작 화면 -->
+  <section id="start-screen" class="screen">
+    <div class="card start-card">
+      <h1>🐾 냥냥 키우기</h1>
+      <p>새로운 고양이 친구가 찾아왔어요!<br />이름을 지어주세요.</p>
+      <input id="name-input" type="text" maxlength="10" placeholder="예: 나비" />
+      <div class="color-picker">
+        <span>털 색깔</span>
+        <button class="color-option selected" data-color="orange" style="--c:#f4a261" aria-label="치즈"></button>
+        <button class="color-option" data-color="gray" style="--c:#9aa5b1" aria-label="회색"></button>
+        <button class="color-option" data-color="black" style="--c:#3d3d3d" aria-label="검정"></button>
+        <button class="color-option" data-color="white" style="--c:#f5f0e8" aria-label="흰색"></button>
+      </div>
+      <button id="start-btn" class="primary">입양하기</button>
+    </div>
+  </section>
+
+  <!-- 게임 화면 -->
+  <section id="game-screen" class="screen hidden">
+    <header class="top-bar">
+      <div>
+        <h2 id="cat-name">냥이</h2>
+        <span id="cat-stage" class="badge">아기 고양이</span>
+        <span id="cat-age" class="muted"></span>
+      </div>
+      <div class="coins">🪙 <span id="coins">0</span></div>
+    </header>
+
+    <div class="room" id="room">
+      <div class="speech hidden" id="speech"></div>
+      <div id="cat" class="cat"></div>
+      <div id="effects"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><label>🍗 포만감</label><div class="bar"><div id="bar-hunger"></div></div></div>
+      <div class="stat"><label>💖 행복</label><div class="bar"><div id="bar-happiness"></div></div></div>
+      <div class="stat"><label>⚡ 에너지</label><div class="bar"><div id="bar-energy"></div></div></div>
+      <div class="stat"><label>🫧 청결</label><div class="bar"><div id="bar-cleanliness"></div></div></div>
+      <div class="stat"><label>🩺 건강</label><div class="bar"><div id="bar-health"></div></div></div>
+      <div class="stat"><label>⭐ 성장</label><div class="bar xp"><div id="bar-xp"></div></div></div>
+    </div>
+
+    <div class="actions">
+      <button data-action="feed">🍗<span>밥주기</span></button>
+      <button data-action="play">🧶<span>놀아주기</span></button>
+      <button data-action="pet">🤚<span>쓰다듬기</span></button>
+      <button data-action="sleep">💤<span>재우기</span></button>
+      <button data-action="wash">🛁<span>씻기기</span></button>
+      <button data-action="minigame">🐟<span>생선잡기</span></button>
+      <button data-action="shop">🛒<span>상점</span></button>
+      <button data-action="vet">🏥<span>병원</span></button>
+    </div>
+
+    <ul id="log" class="log"></ul>
+
+    <footer class="footer">
+      <button id="reset-btn" class="link">처음부터 다시하기</button>
+    </footer>
+  </section>
+
+  <!-- 상점 -->
+  <div id="shop-modal" class="modal hidden">
+    <div class="card">
+      <h3>🛒 상점</h3>
+      <ul id="shop-list" class="shop-list"></ul>
+      <h4>가방</h4>
+      <ul id="inventory" class="inventory"></ul>
+      <button class="close-modal">닫기</button>
+    </div>
+  </div>
+
+  <!-- 미니게임 -->
+  <div id="minigame-modal" class="modal hidden">
+    <div class="card">
+      <h3>🐟 생선 잡기</h3>
+      <p class="muted">튀어오르는 생선을 눌러 잡아요! <span id="mg-time">10</span>초 · 잡은 생선 <span id="mg-score">0</span></p>
+      <div id="mg-area" class="mg-area"></div>
+      <button id="mg-close" class="close-modal hidden">닫기</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
