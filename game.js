@@ -570,9 +570,23 @@ function init() {
     btn.addEventListener("click", () => btn.closest(".modal").classList.add("hidden"));
   });
 
-  $("#reset-btn").addEventListener("click", () => {
-    if (!confirm("정말 처음부터 다시 시작할까요? 지금 고양이와의 기록이 사라져요.")) return;
-    localStorage.removeItem(SAVE_KEY);
+  // 브라우저 confirm 대신 두 번 눌러서 확인
+  let resetArmed = null;
+  $("#reset-btn").addEventListener("click", (e) => {
+    const btn = e.currentTarget;
+    if (!resetArmed) {
+      btn.textContent = "정말 초기화할까요? 한 번 더 누르면 기록이 사라져요";
+      resetArmed = setTimeout(() => {
+        btn.textContent = "처음부터 다시하기";
+        resetArmed = null;
+      }, 4000);
+      return;
+    }
+    try {
+      localStorage.removeItem(SAVE_KEY);
+    } catch (err) {
+      /* 저장소를 쓸 수 없어도 새로 시작 */
+    }
     location.reload();
   });
 
